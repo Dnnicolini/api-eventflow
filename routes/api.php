@@ -15,6 +15,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/logout', 'logout')->middleware('auth:sanctum');
 });
 
-Route::get('/events', [EventController::class, 'index']);
-Route::apiResource('categories', CategoryController::class);
-Route::apiResource('locations', LocationController::class);
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/events', [EventController::class, 'index']);
+    Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('locations', LocationController::class);
+});
+
