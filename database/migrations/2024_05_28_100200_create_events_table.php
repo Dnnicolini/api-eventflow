@@ -23,6 +23,8 @@ return new class extends Migration
             $table->text('description');
             $table->date('start_date');
             $table->time('start_time');
+            $table->date('end_date')->nullable();
+            $table->time('end_time')->nullable();
             $table->decimal('price', 10, 2)->default(0);
             $table->string('image_path')->nullable();
             $table->timestamps();

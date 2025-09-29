@@ -21,6 +21,8 @@ class Event extends Model
         'description',
         'start_date',
         'start_time',
+        'end_date',
+        'end_time',
         'price',
         'image_path',
     ];

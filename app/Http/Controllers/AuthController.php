@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Mail\ResetPassword;
 use App\Mail\RegisterSucess;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -48,8 +49,12 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
-        Mail::to($user->email)->send(new RegisterSucess($user, ''));
-        return response()->json(['data' => UserResource::make($user), 'message' => 'User created successfully'], 201);
+        Mail::to($user->email)->send(new RegisterSucess($user));
+
+        return response()->json([
+            'data' => UserResource::make($user),
+            'message' => 'User created successfully',
+        ], 201);
     }
 
     public function resetPassword(Request $request)
